@@ -6,7 +6,7 @@ python utils/offline_ann.py --index_name dureader_robust_query_encoder \
                             --query_embedding_model rocketqa-zh-nano-query-encoder \
                             --passage_embedding_model rocketqa-zh-nano-para-encoder \
                             --port 9200 \
-                            --host localhost \
+                            --host 10.32.132.80 \
                             --embedding_dim 312 \
                             --delete_index 
 # windows & macos                             

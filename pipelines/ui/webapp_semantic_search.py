@@ -41,7 +41,7 @@ DEFAULT_ANSWER_AT_STARTUP = os.getenv("DEFAULT_ANSWER_AT_STARTUP",
 # Sliders
 DEFAULT_DOCS_FROM_RETRIEVER = int(os.getenv("DEFAULT_DOCS_FROM_RETRIEVER",
                                             "30"))
-DEFAULT_NUMBER_OF_ANSWERS = int(os.getenv("DEFAULT_NUMBER_OF_ANSWERS", "3"))
+DEFAULT_NUMBER_OF_ANSWERS = int(os.getenv("DEFAULT_NUMBER_OF_ANSWERS", "10"))
 # Labels for the evaluation
 EVAL_LABELS = os.getenv("EVAL_FILE",
                         str(Path(__file__).parent / "pdf.csv"))
@@ -201,7 +201,7 @@ def main():
         for count, result in enumerate(st.session_state.results):
             context = result["context"]
             st.write(
-                markdown("<style>.css-12oz5g7{max-width:10000px; width: 1300px;}</style>"),
+                markdown("<style>.css-12oz5g7{max-width:10000px; width: 92%;}</style>"),
                 markdown(context),
                 unsafe_allow_html=True,
             )
