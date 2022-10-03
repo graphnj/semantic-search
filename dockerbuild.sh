@@ -1,0 +1,1 @@
+docker build -t cityie-search:22.10.3 -f docker/Dockerfile .
