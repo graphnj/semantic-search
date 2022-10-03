@@ -63,7 +63,7 @@ def on_change_text():
 
 
 def main():
-
+    print("语义检索starting...")
     st.set_page_config(
         page_title="一网统管 语义检索",
         page_icon=
@@ -105,15 +105,17 @@ def main():
     if not DISABLE_FILE_UPLOAD:
         st.sidebar.write("## 文件上传:")
         data_files = st.sidebar.file_uploader(
-            "",
+            label="doc upload",
             type=["pdf", "txt", "docx", "png"],
             help="文件上传",
             accept_multiple_files=True)
         for data_file in data_files:
             # Upload file
+            print("find data file in list:",data_file)
             if data_file:
                 raw_json = upload_doc(data_file)
                 st.sidebar.write(str(data_file.name) + " &nbsp;&nbsp; ✅ ")
+        st.sidebar.file_uploader().clear()
     hs_version = ""
     try:
         hs_version = f" <small>(v{pipelines_version()})</small>"
@@ -126,23 +128,23 @@ def main():
         st.error(f"The eval file was not found.")
         sys.exit(f"The eval file was not found under `{EVAL_LABELS}`.")
 
-    # Search bar
-    question = st.text_input("",
+    # Search bar  for streamlit 1.13 label empty will trigger warning
+    question = st.text_input("input search question",
                              value=st.session_state.question,
                              key="quest",
                              on_change=on_change_text,
                              max_chars=100,
                              placeholder='请输入您的问题')
     col1, col2 = st.columns(2)
-    col1.markdown("<style>.stButton button {width:100%;}</style>",
+    col1.markdown("<style>.stButton button {width:80%;}</style>",
                   unsafe_allow_html=True)
-    col2.markdown("<style>.stButton button {width:100%;}</style>",
+    col2.markdown("<style>.stButton button {width:80%;}</style>",
                   unsafe_allow_html=True)
 
     # Run button
-    run_pressed = col1.button("运行")
+    run_pressed = col1.button("检索")
     # Get next random question from the CSV
-    if col2.button("随机生成"):
+    if col2.button("样例问题"):
         reset_results()
         new_row = df.sample(1)
         while (
@@ -171,8 +173,7 @@ def main():
         reset_results()
         st.session_state.question = question
         with st.spinner(
-                "🧠 &nbsp;&nbsp; Performing neural search on documents... \n "
-                "Do you want to optimize speed or accuracy? \n"):
+                "🧠 &nbsp;&nbsp; 拼命检索中,请稍后... \n"):
             try:
                 st.session_state.results, st.session_state.raw_json = semantic_search(
                     question,

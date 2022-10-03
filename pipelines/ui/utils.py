@@ -25,6 +25,8 @@ import streamlit as st
 from io import StringIO
 
 API_ENDPOINT = os.getenv("API_ENDPOINT")
+if API_ENDPOINT==None:
+    API_ENDPOINT = "http://127.0.0.1:8891"
 #本地调试修改
 #API_ENDPOINT="http://127.0.0.1:9981"
 STATUS = "initialized"
