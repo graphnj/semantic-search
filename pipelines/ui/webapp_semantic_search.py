@@ -115,7 +115,7 @@ def main():
             if data_file:
                 raw_json = upload_doc(data_file)
                 st.sidebar.write(str(data_file.name) + " &nbsp;&nbsp; ✅ ")
-        st.sidebar.file_uploader().clear()
+
     hs_version = ""
     try:
         hs_version = f" <small>(v{pipelines_version()})</small>"
