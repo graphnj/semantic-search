@@ -10,7 +10,7 @@ COPY docker/run_client.sh /home/cityie_nlp/pipelines
 COPY docker/semantic_search.yaml /home/cityie_nlp/pipelines
 COPY docker/dense_qa.yaml /home/cityie_nlp/pipelines
 RUN chmod +x /home/cityie_nlp/start.sh
-RUN pip install -r /home/cityie_nlp/pipelines/requirements.txt
+RUN pip install -r /home/cityie_nlp/pipelines/requirements.txt -i https://pypi.douban.com/simple
 WORKDIR /home/cityie_nlp/
 RUN chmod +x /home/cityie_nlp/start.sh
 ENTRYPOINT /home/cityie_nlp/start.sh && tail -f /dev/null
