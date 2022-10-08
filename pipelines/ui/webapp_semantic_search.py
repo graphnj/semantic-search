@@ -105,7 +105,7 @@ def main():
     if not DISABLE_FILE_UPLOAD:
         st.sidebar.write("## 文件上传:")
         data_files = st.sidebar.file_uploader(
-            label="doc upload",
+            label="上传新文件，请勿随意提交",
             type=["pdf", "txt", "docx", "png"],
             help="文件上传",
             accept_multiple_files=True)
@@ -115,6 +115,11 @@ def main():
             if data_file:
                 raw_json = upload_doc(data_file)
                 st.sidebar.write(str(data_file.name) + " &nbsp;&nbsp; ✅ ")
+
+    st.sidebar.header("应用说明")
+    st.sidebar.write("应用1. 一网统管业务领域政策文档内容的语义检索；"
+                     "应用2. 城市信息化家底：信息化建设方案基于内容的语义检索"
+                     "备注1. 单纯演示文档内容语义检索， 未融合标题及关键字检索")
 
     hs_version = ""
     try:
@@ -129,7 +134,7 @@ def main():
         sys.exit(f"The eval file was not found under `{EVAL_LABELS}`.")
 
     # Search bar  for streamlit 1.13 label empty will trigger warning
-    question = st.text_input("input search question",
+    question = st.text_input("请输入您的问题",
                              value=st.session_state.question,
                              key="quest",
                              on_change=on_change_text,
